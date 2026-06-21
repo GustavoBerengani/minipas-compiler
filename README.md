@@ -128,7 +128,7 @@ end.
 
 - `param(indice)` considera que o argumento existe e contem um inteiro valido.
 - Nao ha arrays, registros nem numeros reais.
-- Os inteiros tem 64 bits. O exemplo `pidigits` pode estourar para entradas
-  grandes; ele foi feito para demonstracoes pequenas, como 10 digitos.
+- Os inteiros tem 64 bits. O exemplo `pidigits` usa ponto fixo e limita a saida
+  aos primeiros 13 digitos para permanecer dentro desse intervalo.
 - A verificacao de `return` confirma sua existencia, mas nao prova que todos os
   caminhos possiveis de uma funcao chegam a um `return`.

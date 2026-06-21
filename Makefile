@@ -44,7 +44,8 @@ $(BUILD)/parser.o: $(BUILD)/parser.cpp | $(BUILD)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(BUILD)/lexer.o: $(BUILD)/lexer.cpp | $(BUILD)
-	$(CXX) $(CXXFLAGS) -Wno-deprecated-register -c $< -o $@
+	$(CXX) $(CXXFLAGS) -Wno-deprecated-register -Wno-unused-function \
+		-Wno-unneeded-internal-declaration -c $< -o $@
 
 test: $(TARGET)
 	bash scripts/test.sh

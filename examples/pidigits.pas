@@ -1,42 +1,53 @@
 program PiDigits;
 
 var
-  digits, q, r, t, k, digit, limit, count, newR, newDigit: integer;
+  digits, scale, piValue, divisor, current, count: integer;
+
+function ArcTanInverse(inverse, precision: integer): integer;
+var
+  term, sum, denominator, part, sign: integer;
+begin
+  term := precision / inverse;
+  sum := term;
+  denominator := 3;
+  sign := -1;
+
+  while term <> 0 do
+  begin
+    term := term / (inverse * inverse);
+    part := term / denominator;
+    if sign < 0 then
+      sum := sum - part
+    else
+      sum := sum + part;
+    denominator := denominator + 2;
+    sign := -sign
+  end;
+  return sum
+end;
 
 begin
-  (* Algoritmo spigot de Jeremy Gibbons, usando apenas inteiros. *)
+  { Formula de Machin com 15 casas de ponto fixo. }
   digits := param(1);
-  q := 1;
-  r := 0;
-  t := 1;
-  k := 1;
-  digit := 3;
-  limit := 3;
-  count := 0;
+  if digits > 13 then
+    digits := 13;
 
-  while count < digits do
+  if digits > 0 then
   begin
-    if (4 * q + r - t) < (digit * t) then
+    scale := 1000000000000000;
+    piValue := 16 * ArcTanInverse(5, scale) -
+               4 * ArcTanInverse(239, scale);
+    divisor := scale;
+    count := 0;
+
+    while count < digits do
     begin
-      write(digit);
+      current := (piValue / divisor) mod 10;
+      write(current);
       count := count + 1;
       if (count = 1) and (digits > 1) then
         write('.');
-      newR := 10 * (r - digit * t);
-      digit := ((10 * (3 * q + r)) / t) - (10 * digit);
-      q := 10 * q;
-      r := newR
-    end
-    else
-    begin
-      newR := (2 * q + r) * limit;
-      newDigit := (q * (7 * k) + 2 + r * limit) / (t * limit);
-      q := q * k;
-      t := t * limit;
-      limit := limit + 2;
-      k := k + 1;
-      digit := newDigit;
-      r := newR
+      divisor := divisor / 10
     end
   end;
   writeln()

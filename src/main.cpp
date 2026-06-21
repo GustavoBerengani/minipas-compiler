@@ -106,7 +106,8 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    std::string assemblyCommand = shellQuote(clang) + " -S -x ir " +
+    std::string assemblyCommand = shellQuote(clang) +
+        " -Wno-override-module -S -x ir " +
         shellQuote(irPath.string()) + " -o " + shellQuote(assemblyPath.string());
     if (std::system(assemblyCommand.c_str()) != 0) {
         std::cerr << "Aviso: nao foi possivel gerar o arquivo assembly\n";
