@@ -1,0 +1,25 @@
+Compilando factor.pas
+Compilado com sucesso:
+  executavel: "artifacts/factor"
+  LLVM IR:    "artifacts/factor.ll"
+  assembly:   "artifacts/factor.s"
+OK: factor 84 -> 2 2 3 7
+Compilando isprime.pas
+Compilado com sucesso:
+  executavel: "artifacts/isprime"
+  LLVM IR:    "artifacts/isprime.ll"
+  assembly:   "artifacts/isprime.s"
+OK: isprime 97 -> true
+Compilando pidigits.pas
+Compilado com sucesso:
+  executavel: "artifacts/pidigits"
+  LLVM IR:    "artifacts/pidigits.ll"
+  assembly:   "artifacts/pidigits.s"
+OK: pidigits 10 -> 3.141592653
+Compilando fibonacci.pas
+Compilado com sucesso:
+  executavel: "artifacts/fibonacci"
+  LLVM IR:    "artifacts/fibonacci.ll"
+  assembly:   "artifacts/fibonacci.s"
+OK: fibonacci 10 -> 55
+Todos os testes passaram.
