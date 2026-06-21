@@ -26,7 +26,7 @@ llvm::Type *CodeGenerator::llvmType(ValueType type) const {
     switch (type) {
     case ValueType::Integer: return llvm::Type::getInt64Ty(*context_);
     case ValueType::Boolean: return llvm::Type::getInt1Ty(*context_);
-    case ValueType::String: return llvm::Type::getInt8PtrTy(*context_);
+    case ValueType::String: return llvm::PointerType::getUnqual(*context_);
     case ValueType::Void: return llvm::Type::getVoidTy(*context_);
     }
     return llvm::Type::getVoidTy(*context_);
@@ -117,7 +117,7 @@ llvm::Value *CodeGenerator::generateExpr(const Expr &expression) {
     if (auto argument = dynamic_cast<const ArgumentExpr *>(&expression)) {
         llvm::Value *index = generateExpr(*argument->index);
         if (!index) return nullptr;
-        llvm::Type *characterPointer = llvm::Type::getInt8PtrTy(*context_);
+        llvm::Type *characterPointer = llvm::PointerType::getUnqual(*context_);
         llvm::Value *argv = builder_->CreateLoad(argvGlobal_->getValueType(),
                                                  argvGlobal_, "argv.value");
         llvm::Value *slot = builder_->CreateInBoundsGEP(characterPointer, argv,
@@ -317,7 +317,7 @@ bool CodeGenerator::generate(const Program &program, const std::string &irPath) 
     routines_.clear();
     module_ = std::make_unique<llvm::Module>(program.name, *context_);
     module_->setSourceFileName(program.name + ".pas");
-    llvm::Type *i8Pointer = llvm::Type::getInt8PtrTy(*context_);
+    llvm::Type *i8Pointer = llvm::PointerType::getUnqual(*context_);
     llvm::Type *i32 = llvm::Type::getInt32Ty(*context_);
     llvm::FunctionType *printfType = llvm::FunctionType::get(i32, {i8Pointer}, true);
     printfFunction_ = llvm::Function::Create(printfType,

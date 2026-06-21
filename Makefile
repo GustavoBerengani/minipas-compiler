@@ -8,7 +8,8 @@ TARGET := $(BUILD)/minipas
 
 LLVM_CXXFLAGS := $(shell $(LLVM_CONFIG) --cxxflags)
 LLVM_LIBS := $(shell $(LLVM_CONFIG) --ldflags --system-libs --libs core support)
-CXXFLAGS := $(LLVM_CXXFLAGS) -std=c++17 -frtti -Wall -Wextra -Wpedantic -Iinclude -I$(BUILD)
+CXXFLAGS := $(LLVM_CXXFLAGS) -std=c++17 -frtti -Wall -Wextra -Wpedantic \
+            -Wno-unused-parameter -Iinclude -I$(BUILD)
 
 OBJECTS := $(BUILD)/main.o $(BUILD)/semantic.o $(BUILD)/codegen.o \
            $(BUILD)/parser.o $(BUILD)/lexer.o
