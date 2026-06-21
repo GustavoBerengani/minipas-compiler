@@ -9,10 +9,6 @@ chama o Clang para produzir um executavel nativo.
 - Gustavo Negrão de Souza Berengani Ramos
 - William da Silva Marques
 
-> O enunciado informa que as equipes devem ter tres alunos, mas foram
-> informados apenas os dois nomes acima. O grupo precisa confirmar essa situacao
-> com o professor antes da entrega.
-
 ## Funcionalidades
 
 - Tipos `integer` (64 bits) e `boolean`.
