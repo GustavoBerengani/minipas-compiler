@@ -10,7 +10,6 @@
 #include <llvm/IR/Type.h>
 #include <llvm/IR/Verifier.h>
 #include <llvm/Support/FileSystem.h>
-#include <llvm/Support/Host.h>
 #include <llvm/Support/raw_ostream.h>
 
 #include <system_error>
@@ -318,8 +317,6 @@ bool CodeGenerator::generate(const Program &program, const std::string &irPath) 
     routines_.clear();
     module_ = std::make_unique<llvm::Module>(program.name, *context_);
     module_->setSourceFileName(program.name + ".pas");
-    module_->setTargetTriple(llvm::sys::getDefaultTargetTriple());
-
     llvm::Type *i8Pointer = llvm::Type::getInt8PtrTy(*context_);
     llvm::Type *i32 = llvm::Type::getInt32Ty(*context_);
     llvm::FunctionType *printfType = llvm::FunctionType::get(i32, {i8Pointer}, true);
