@@ -31,7 +31,8 @@ $(BUILD)/lexer.cpp: lexer.l $(BUILD)/parser.hpp | $(BUILD)
 	$(FLEX) -o $@ lexer.l
 
 $(BUILD)/main.o: src/main.cpp include/ast.hpp include/codegen.hpp \
-                 include/semantic.hpp include/parser_state.hpp $(BUILD)/parser.hpp | $(BUILD)
+                 include/semantic.hpp include/lexer_state.hpp \
+                 include/parser_state.hpp $(BUILD)/parser.hpp | $(BUILD)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
 $(BUILD)/semantic.o: src/semantic.cpp include/ast.hpp include/semantic.hpp | $(BUILD)
@@ -43,7 +44,7 @@ $(BUILD)/codegen.o: src/codegen.cpp include/ast.hpp include/codegen.hpp | $(BUIL
 $(BUILD)/parser.o: $(BUILD)/parser.cpp | $(BUILD)
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-$(BUILD)/lexer.o: $(BUILD)/lexer.cpp | $(BUILD)
+$(BUILD)/lexer.o: $(BUILD)/lexer.cpp include/lexer_state.hpp | $(BUILD)
 	$(CXX) $(CXXFLAGS) -Wno-deprecated-register -Wno-unused-function \
 		-Wno-unneeded-internal-declaration -c $< -o $@
 
@@ -54,4 +55,4 @@ environment:
 	bash scripts/check-env.sh
 
 clean:
-	rm -rf $(BUILD) artifacts
+	rm -rf $(BUILD)

@@ -1,4 +1,5 @@
 #include "codegen.hpp"
+#include "lexer_state.hpp"
 #include "parser.hpp"
 #include "parser_state.hpp"
 #include "semantic.hpp"
@@ -74,10 +75,12 @@ int main(int argc, char **argv) {
         return 1;
     }
     yylineno = 1;
+    minipas::lexerHadError = false;
     minipas::parsedProgram.reset();
     int parseResult = yyparse();
     std::fclose(yyin);
-    if (parseResult != 0 || !minipas::parsedProgram) return 1;
+    if (parseResult != 0 || minipas::lexerHadError || !minipas::parsedProgram)
+        return 1;
 
     minipas::SemanticAnalyzer semantic;
     if (!semantic.analyze(*minipas::parsedProgram)) {

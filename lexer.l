@@ -3,6 +3,7 @@
 
 %{
 #include "parser.hpp"
+#include "lexer_state.hpp"
 
 #include <cctype>
 #include <cstdio>
@@ -13,6 +14,10 @@
 #define YY_USER_ACTION                         \
     yylloc.first_line = yylineno;              \
     yylloc.last_line = yylineno;
+
+namespace minipas {
+bool lexerHadError = false;
+}
 
 static char *copyText(const std::string &text) {
     char *result = static_cast<char *>(std::malloc(text.size() + 1));
@@ -57,6 +62,7 @@ IDENT       {LETTER}({LETTER}|{DIGIT})*
 <PAREN_COMMENT>\n          ;
 <PAREN_COMMENT>.           ;
 <BRACE_COMMENT,PAREN_COMMENT><<EOF>> {
+    minipas::lexerHadError = true;
     std::fprintf(stderr, "Erro lexico na linha %d: comentario nao terminado\n", yylineno);
     return 0;
 }
@@ -119,6 +125,7 @@ IDENT       {LETTER}({LETTER}|{DIGIT})*
 }
 
 .                          {
+    minipas::lexerHadError = true;
     std::fprintf(stderr, "Erro lexico na linha %d: caractere inesperado '%s'\n",
                  yylineno, yytext);
     return yytext[0];
