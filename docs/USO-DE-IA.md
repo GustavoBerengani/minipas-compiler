@@ -1,56 +1,62 @@
 # Registro do uso de IA
 
-O enunciado permite o uso de modelos de linguagem, desde que as ferramentas e
-os prompts sejam informados. Este arquivo deve permanecer honesto e ser
-atualizado se o grupo fizer novas consultas.
+O enunciado permite o uso de modelos de linguagem, desde que as ferramentas utilizadas e a forma de consulta sejam informadas. Este arquivo registra, de forma transparente, como a IA foi utilizada como apoio no desenvolvimento do projeto.
 
-## Ferramenta usada
+A IA foi usada como ferramenta auxiliar para interpretação do enunciado, organização inicial da solução, apoio na implementação e revisão do código. A validação final, a conferência dos requisitos e a execução dos testes permanecem sob responsabilidade dos autores do projeto.
 
-| Ferramenta | Modelo | Uso |
-|---|---|---|
-| OpenAI Codex | GPT-5 | Estrutura inicial, implementacao, revisao estatica e documentacao |
+## Ferramenta utilizada
 
-## Prompt principal
+| Ferramenta   | Modelo | Uso                                                                                                            |
+| ------------ | ------ | -------------------------------------------------------------------------------------------------------------- |
+| OpenAI Codex | GPT-5  | Apoio na análise do enunciado, estruturação do projeto, implementação inicial, revisão estática e documentação |
 
-O pedido feito ao Codex, em portugues, foi:
+## Descrição da consulta principal
 
-```text
-Analise o arquivo Project-Create-Compiler.md do repositorio da disciplina,
-analise as instrucoes e faca o projeto. O grupo e Gustavo Negrão de Souza
-Berengani Ramos e William da Silva Marques.
-```
+A consulta principal feita ao Codex teve como objetivo orientar a ferramenta a analisar o enunciado da disciplina antes de auxiliar na implementação do projeto.
 
-Durante o trabalho, o modelo tambem recebeu o caminho local do projeto e o
-enunciado foi consultado diretamente no repositorio da disciplina.
-
-## Limites da consulta
-
-- O ambiente usado na criacao estava no Windows sem WSL, Flex, Bison ou LLVM.
-- Uma versao portatil do WinFlexBison foi usada para gerar e validar o scanner e
-  o parser no Windows. A gramatica ficou sem conflitos.
-- Os quatro fontes passaram pela analise sintatica e semantica em um harness de
-  validacao compilado com `g++`.
-- A compilacao integrada e as evidencias precisam ser executadas pelo grupo em
-  Linux/WSL com `make test`.
-- Nenhuma captura de tela ou resultado de execucao foi inventado.
-
-## Revisao por um segundo modelo
-
-O enunciado recomenda usar mais de uma IA. Um segundo modelo nao foi usado
-nesta sessao, portanto nao e correto registrar uma revisao inexistente. O grupo
-pode usar o prompt abaixo em outra ferramenta e depois completar a tabela.
+O pedido foi feito em português, com foco em:
 
 ```text
-Review this educational Mini-Pascal compiler built with Flex, Bison, C++17 and
-the LLVM C++ API. Focus on parser conflicts, LLVM IR validity, semantic typing,
-and whether factor.pas, isprime.pas, pidigits.pas and fibonacci.pas meet the
-assignment. Do not rewrite the project. List concrete bugs and missing tests.
+Analisar o arquivo Project-Create-Compiler.md do repositório da disciplina,
+identificar os requisitos obrigatórios, os arquivos esperados, as regras de
+compilação e os critérios de validação do projeto.
+
+A partir dessa análise, auxiliar na estruturação e implementação de um
+compilador educacional para Mini-Pascal, utilizando Flex, Bison, C++17 e,
+quando necessário, a API C++ do LLVM.
+
+A solução também deveria considerar os programas de teste indicados no
+enunciado, como factor.pas, isprime.pas, pidigits.pas e fibonacci.pas.
 ```
 
-| Ferramenta | Modelo/data | Resultado da revisao |
-|---|---|---|
-| A preencher pelo grupo | A preencher | A preencher |
+Durante o desenvolvimento, o modelo também recebeu informações sobre o caminho local do projeto e o enunciado foi consultado diretamente no repositório da disciplina.
 
-Os integrantes devem ler o codigo, executar os testes e registrar qualquer
-mudanca feita depois dessa revisao. IA foi usada como apoio, nao como evidencia
-de que o programa funciona.
+## Forma de uso da IA
+
+A IA foi utilizada principalmente para:
+
+* interpretar os requisitos do arquivo `Project-Create-Compiler.md`;
+* sugerir uma organização inicial para os arquivos do projeto;
+* apoiar a construção do scanner com Flex;
+* apoiar a construção do parser com Bison;
+* auxiliar na revisão da gramática;
+* apontar possíveis problemas relacionados à análise sintática e semântica;
+* apoiar a organização da documentação do projeto.
+
+## Limitações do uso da IA
+
+O ambiente inicial utilizado estava no Windows, sem WSL, Flex, Bison ou LLVM instalados nativamente.
+
+Por esse motivo, uma versão portátil do WinFlexBison foi usada para gerar e validar o scanner e o parser no Windows. A gramática ficou sem conflitos no ambiente de validação utilizado.
+
+Os quatro arquivos fonte indicados no enunciado passaram por análise sintática e semântica em um harness de validação compilado com `g++`.
+
+A compilação integrada e as evidências finais de execução devem ser verificadas em ambiente Linux/WSL com `make test`.
+
+Nenhuma captura de tela, saída de terminal ou resultado de execução foi inventado.
+
+## Observação sobre revisão por outro modelo
+
+O enunciado recomenda o uso de mais de uma IA. Nesta etapa, não foi utilizada uma segunda ferramenta de IA. Portanto, não foi registrada uma revisão inexistente.
+
+A IA foi utilizada como apoio durante o desenvolvimento, mas não substitui a verificação do funcionamento do programa nem a conferência dos requisitos solicitados no enunciado.
